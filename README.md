@@ -17,26 +17,20 @@ less
 Copy code
 
 4. **Cấu Hình Biến Môi Trường**: Mở tệp `.env.example`, đổi tên tệp thành `.env`, và điền các thông tin sau:
-MONGO_URL: địa chỉ kết nối tới CSDL
-URL: địa chỉ web client
-SECRET_KEY: Khoá bí mật
-MAIL_PASSWORD: khoá ứng dụng của Google
-MAIL_NAME: địa chỉ email
-CLOUDINARY_NAME: thông tin này lấy từ dashboard của Cloudinary
-CLOUDINARY_KEY: thông tin này lấy từ dashboard của Cloudinary
-CLOUDINARY_SECRET: thông tin này lấy từ dashboard của Cloudinary
-
-less
-Copy code
+- **MONGO_URL**: địa chỉ kết nối tới CSDL
+- **URL**: địa chỉ web client
+- **SECRET_KEY**: Khoá bí mật
+- **MAIL_PASSWORD**: khoá ứng dụng của Google
+- **MAIL_NAME**: địa chỉ email
+- **CLOUDINARY_NAME**: thông tin này lấy từ dashboard của Cloudinary
+- **CLOUDINARY_KEY**: thông tin này lấy từ dashboard của Cloudinary
+- **CLOUDINARY_SECRET**: thông tin này lấy từ dashboard của Cloudinary
 
 #### Khởi Chạy
 
 - **Khởi Chạy Server**: Sau khi cài đặt dependencies, chạy lệnh sau để khởi động ứng dụng:
 npm run dev # for development
 npm start # for production
-
-less
-Copy code
 
 - **Khởi Chạy Client**: Sử dụng liveserver để khởi chạy trang web.
 
