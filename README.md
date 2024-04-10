@@ -11,10 +11,7 @@
 2. **Clone Repository**: Clone repository từ Github vào máy tính của bạn.
 
 3. **Cài Đặt Dependencies**: Mở terminal và di chuyển vào thư mục của dự án, sau đó chọn server và chạy lệnh sau để cài đặt các dependencies:
-npm install
-
-less
-Copy code
+- **npm install**
 
 4. **Cấu Hình Biến Môi Trường**: Mở tệp `.env.example`, đổi tên tệp thành `.env`, và điền các thông tin sau:
 - **MONGO_URL**: địa chỉ kết nối tới CSDL
@@ -29,8 +26,8 @@ Copy code
 #### Khởi Chạy
 
 - **Khởi Chạy Server**: Sau khi cài đặt dependencies, chạy lệnh sau để khởi động ứng dụng:
-npm run dev # for development
-npm start # for production
+- **npm run dev** # for development
+- **npm start** # for production**
 
 - **Khởi Chạy Client**: Sử dụng liveserver để khởi chạy trang web.
 
