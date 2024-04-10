@@ -1,0 +1,48 @@
+<main class="body">
+    <div class="container my-5">
+        <div ng-show="isEmpty">
+            <h1 class="text-center">Danh Sách Trống</h1>
+        </div>
+
+        <div ng-show="!isEmpty">
+            <h1 class="text-center">Danh Sách Yêu Thích</h1>
+
+            <div class="row mt-3 row-gap-4">
+
+                <div class="col-6 col-md-4 col-xl-2" ng-repeat="product in productsWishlist">
+                    <div class="card position-relative custom-card-hover">
+                        <a ng-href="#!detail/{{ product._id }}" class="nav-link p-2">
+                            <img src="{{ product.images[0] }}" class="img-fluid card-img-top">
+                        </a>
+                        <div class="card-body p-2">
+                            <a class="nav-link fs-7" ng-href="#!detail/{{ product._id }}">
+                                {{ product.title }}
+                            </a>
+
+                            <div class="d-flex align-items-center justify-content-start gap-2">
+                                <p class="text-danger fw-bold mb-0">
+                                    {{ product.sale > 0 ? ((product.price - (product.price * product.sale / 100)) |
+                                    currency:'':'0') + 'đ' : (product.price | currency:'':'0') + 'đ' }}
+                                </p>
+                                <p class="mb-0 fs-8 text-decoration-line-through">
+                                    {{ product.sale > 0 ? (product.price | currency:'':'0') + 'đ' : '' }}
+                                </p>
+                            </div>
+                        </div>
+                        <button class="btn btn-danger w-50 mb-2 ms-1" data-bs-toggle="modal"
+                            data-bs-target="#showDetail" ng-click="showDetail(product)">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+
+                        <i class="fa-solid fs-3 z-4 fa-xmark-circle position-absolute cursor-pointer mt-4 top-0 end-0 p-2 text-danger"
+                            ng-click="removeWishlist(product._id)"></i>
+
+                        <span class="badge text-bg-danger position-absolute p-2" ng-if="product.sale > 0">
+                            {{ product.sale }}%
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

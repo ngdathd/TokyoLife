@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TokyoLife">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="./src/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./src/assets/css/style.css">
+    <link rel="shortcut icon" href="./src/assets/img/favicon.webp" type="image/x-icon">
+    <!--fontawesome-->
+    <script src="https://kit.fontawesome.com/d99fedf711.js" crossorigin="anonymous"></script>
+
+    <!--sweetalert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--pdfmake-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
+
+    <!--angular-->
+    <script src="./src/assets/js/angular.js"></script>
+    <script src="./src/assets/js/angular-cookie.js"></script>
+    <script src="./src/assets/js/angular-router.js"></script>
+    <script src="./src/assets/js/angular-jwt.js"></script>
+
+    <!--chartjs-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!--excel-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+
+    <script src="./src/app.js"></script>
+
+    <!--switchery-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.js"></script>
+
+    <script src="./src/assets/js/ui-switchery.js"></script>
+    <script src="./src/assets/js/file.js"></script>
+</head>
+
+<body ng-controller="AppController">
+    <div class="wrapper">
+
+        <div ng-include="'./src/components/_sidebar.html'"></div>
+
+        <div class="main">
+
+            <div ng-include="'./src/components/_header.html'"></div>
+
+            <ng-view></ng-view>
+
+        </div>
+    </div>
+
+    <script src="./src/services/APIServices.js"></script>
+    <script src="./src/services/DataServices.js"></script>
+    <script src="./src/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./src/controllers/DashboardController.js"></script>
+    <script src="./src/controllers/CategoryController.js"></script>
+    <script src="./src/controllers/AppController.js"></script>
+    <script src="./src/controllers/UserController.js"></script>
+    <script src="./src/controllers/ProductController.js"></script>
+    <script src="./src/controllers/CouponController.js"></script>
+    <script src="./src/controllers/OrderController.js"></script>
+    <script src="./src/controllers/FeedbackController.js"></script>
+
+</body>
+
+</html>

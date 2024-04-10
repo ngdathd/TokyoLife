@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="p-3">
+        <h4 class="mb-5 mt-3">Thông tin cá nhân</h4>
+
+        <div class="row">
+            <div class="col-12 col-md-2 col-sm-3">
+                <div class="shadow-sm d-flex flex-column align-items-center gap-1 pb-3 border rounded-3">
+                    <img src="./src/assets/img/icon/avatar.png" class="img-fluid rounded-5">
+                    <input type="file" name="avatar" id="avatar">
+                    <label for="avatar" class="avatar">Chọn Ảnh</label>
+                </div>
+            </div>
+
+            <form class="col-12 col-md-10 col-sm-10" ng-submit="updateUserInfo()">
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="name" class="form-label">Họ Và Tên</label>
+                        <input type="text" name="name" id="name" class="form-control" ng-model="userData.name">
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" ng-model="userData.email">
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="phpne" class="form-label">Số Điện Thoại</label>
+                        <input type="phone" name="phone" id="phone" class="form-control" ng-model="userData.mobile">
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-4">
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-4 mb-4">
+                            <label class="form-label">Chọn tỉnh / thành phố</label>
+                            <select ng-model="selectedProvince" ng-options="province.Name for province in locations"
+                                class="form-control">
+                                <option value="">Chọn một tỉnh/thành phố</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-4 mb-4">
+                            <label class="form-label">Chọn quận / huyện</label>
+                            <select ng-model="selectedDistrict"
+                                ng-options="district.Name for district in selectedProvince.Districts"
+                                class="form-control">
+                                <option value="">Chọn một quận/huyện</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-4 mb-4">
+                            <label class="form-label">Chọn phường / xã</label>
+                            <select ng-model="selectedWard" ng-options="ward.Name for ward in selectedDistrict.Wards"
+                                class="form-control">
+                                <option value="">Chọn một phường/xã</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <input type="text" ng-model="userData.addressDetail" name="address" id="address"
+                                class="form-control">
+                        </div>
+
+                        <button class="col-12 mb-4 btn btn-danger" type="submit">
+                            Lưu Thay Đổi
+                        </button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>

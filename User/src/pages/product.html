@@ -1,0 +1,104 @@
+<main class="body">
+    <div class="container mt-5">
+        <div class="row p-0">
+            <div class="col-xl-2 col-md-6 col-sm-12">
+                <div class="">
+                    <a href="#!product" class="nav-link w-100 fs-6 fw-medium custom-pd mb-3">Tất Cả Sản Phẩm</a>
+
+                    <a href="#!product?category_id={{ category._id }}"
+                        class="nav-link w-100 fs-6 fw-medium custom-pd mb-3 ng-binding ng-scope"
+                        ng-repeat="category in categories">
+                        {{ category.title }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xl-10 col-sm-12">
+                <div class="custom-dash pb-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h1 class="fs-4 fw-bold">
+                            {{ categoryName }}
+                        </h1>
+
+                        {{ $routeParams.category_id }}
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-5 justify-content-start my-4">
+                    <span class="d-block">Sắp Xếp Theo</span>
+                    <select name="sort" id="sort" class="form-select" style="width: 300px;" ng-model="selectedSortType"
+                        ng-change="applyFiltersAndSort()">
+                        <option value="newest">Sản Phẩm Mới Nhất</option>
+                        <option value="nameAsc">Tên A - Z</option>
+                        <option value="nameDesc">Tên Z - A</option>
+                        <option value="priceDesc">Giá Cao - Thấp</option>
+                        <option value="priceAsc">Giá Thấp - Cao</option>
+                    </select>
+                </div>
+
+
+                <div class="row mt-3 row-gap-4">
+                    <div class="col-xl-2 col-md-4 col-6" ng-repeat="product in displayedProducts">
+                        <div class="card position-relative custom-card-hover">
+                            <a href="#!detail/{{ product._id }}" class="nav-link p-2">
+                                <img src="{{ product.images[0] }}" class="img-fluid card-img-top"
+                                    style="height: 240px !important;object-fit: cover;">
+                            </a>
+                            <div class="card-body p-2">
+                                <a class="nav-link fs-7" href="#!detail/{{ product._id }}">
+                                    {{ product.title }}
+                                </a>
+
+                                <div class="d-flex align-items-center justify-content-start gap-2">
+                                    <p class="text-danger fw-bold mb-0">
+                                        {{ product.sale > 0 ? ((product.price - (product.price * product.sale / 100)) |
+                                        currency:'':'0') + 'đ' : (product.price | currency:'':'0') + 'đ' }}
+                                    </p>
+                                    <p class="mb-0 fs-8 text-decoration-line-through">
+                                        {{ product.sale > 0 ? (product.price | currency:'':'0') + 'đ' : '' }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <span class="badge text-bg-danger position-absolute p-2" ng-if="product.sale > 0">
+                                {{ product.sale }}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5">
+                    <button ng-if="displayedProducts.length < products.length" ng-click="loadMore()"
+                        class="btn btn-danger">
+                        Xem thêm
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <div class="row mt-3 row-gap-4" ng-show="loadingProduct">
+                    <div class="col-6 col-md-4 col-xl-2" ng-repeat="n in [].constructor(12) track by $index">
+                        <div class="card" aria-hidden="true">
+                            <img src="https://phutungnhapkhauchinhhang.com/wp-content/uploads/2020/06/default-thumbnail.jpg"
+                                class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                </h5>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-8"></span>
+                                </p>
+                                <a class="btn btn-danger disabled placeholder col-6" aria-disabled="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
