@@ -1,0 +1,94 @@
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Đơn Hàng Của Bạn</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Mã Đơn Hàng</th>
+                <th scope="col">Ngày Đặt Hàng</th>
+                <th scope="col">Trạng Thái</th>
+                <th scope="col">Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="order in orders | orderBy:createdAt">
+                <td>{{ order._id }}</td>
+                <td>{{ order.createdAt | date: " HH:mm:ss / dd-MM-yyyy" }}</td>
+                <td>{{ order.status }}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#orderDetailModal" ng-click="showOrderDetail(order)">
+                        Chi Tiết
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal hiển thị chi tiết đơn hàng -->
+<div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Chi Tiết Đơn Hàng</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Mã Đơn Hàng:</strong> {{ selectedOrder._id }}</p>
+                <p><strong>Ngày Đặt Hàng:</strong> {{ selectedOrder.createdAt | date: "dd-MM-yyyy" }}</p>
+                <p><strong>Trạng Thái:</strong> {{ selectedOrder.status }}</p>
+                <p><strong>Tên Khách Hàng:</strong> {{ selectedOrder.name }}</p>
+                <p><strong>Email:</strong> {{ selectedOrder.email }}</p>
+                <p><strong>Số Điện Thoại:</strong> {{ selectedOrder.mobile }}</p>
+                <hr>
+                <h4 class="text-center"><strong>Giỏ Hàng</strong></h4>
+                <table class="table table-striped">
+                    <thead>
+                        <th>STT</th>
+                        <th>Ảnh</th>
+                        <th>Sản Phẩm</th>
+                        <th>Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in selectedOrder.items">
+                            <td>{{ $index + 1 }}</td>
+                            <td><img src="{{ item.product.images[0] }}" width="50px"></td>
+                            <td>
+                                <h6>{{ item.product.title }}</h6>
+                                <p>
+                                    Kích thước: {{ item.variant.size }}
+                                    <br>
+                                    Màu sắc: {{ item.variant.color }}
+                                </p>
+                            </td>
+                            <td>
+                                <p class="text-danger fw-bold mb-0">
+                                    {{ item.product.sale > 0 ? ((item.product.price - (item.product.price *
+                                    item.product.sale / 100)) | currency: "": 0) + "đ" : (item.product.price | currency:
+                                    "": 0) + "đ" }}
+                                </p>
+                                <p class="mb-0 fs-8 text-decoration-line-through">
+                                    {{ item.product.sale > 0 ? (item.product.price | currency: "": 0) + "đ" : "" }}
+                                </p>
+                            </td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.price * item.quantity | currency: "": 0 }}đ</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr ng-if="selectedOrder.discount > 0">
+                            <td colspan="5" class="text-end">Giảm Giá:</td>
+                            <td>{{ selectedOrder.discount | currency: "": 0 }}đ</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-end">Tổng Tiền:</td>
+                            <td>{{ selectedOrder.totalPrice | currency: "": 0 }}đ</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

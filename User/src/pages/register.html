@@ -1,0 +1,56 @@
+<main class="body" ng-app="registrationApp" ng-controller="RegisterController">
+    <div class="mt-5 form-width-custom">
+        <h3 class="text-center mb-3 fw-medium">Đăng Ký</h3>
+
+        <form id="form-register" ng-submit="register()">
+
+            <div class="form-group mb-3">
+                <label for="name" class="form-label">Họ Và Tên</label>
+                <input type="text" name="name" id="name" class="form-control" ng-model="name">
+            </div>
+            <div class="form-group mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" ng-model="email">
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+                <label for="password" class="form-label">Mật Khẩu</label>
+                <input type="{{showPassword ? 'text' : 'password'}}" name="password" id="password" class="form-control"
+                    ng-model="password">
+                <i class="fa-solid fa-eye position-absolute top-0 end-0 mt-5 me-3"
+                    ng-click="togglePasswordVisibility()"></i>
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+                <label for="password-confirm" class="form-label">Nhập Lại Mật Khẩu</label>
+                <input type="{{showPassword ? 'text' : 'password'}}" name="confirmPassword" id="password-confirm"
+                    class="form-control" ng-model="confirmPassword">
+                <i class="fa-solid fa-eye position-absolute top-0 end-0 mt-5 me-3"
+                    ng-click="togglePasswordVisibility()"></i>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-danger container-fluid">Đăng Ký</button>
+            </div>
+
+            <p class="fs-6 mb-2 d-flex align-items-center gap-2">Bạn đã có tài khoản ? <a class="nav-link text-danger"
+                    href="#!login">Đăng Nhập Ngay</a></p>
+            <a href="#!password/forgot" class="nav-link text-danger">Quên Mật Khẩu</a>
+        </form>
+
+        <p class="text-center fs-6 fw-bold my-3">Hoặc</p>
+
+        <div class="login-social d-flex flex-column gap-3">
+            <div class="login-fb d-flex align-items-center justify-content-center gap-2 py-2 rounded-3">
+                <img src="./src/assets/img/icon/icon-fb.svg" class="img-fluid icon-size-custom">
+                <span class="text-white fw-medium">Đăng Nhập Với Facebook</span>
+            </div>
+
+            <div class="login-gg d-flex align-items-center justify-content-center gap-2 py-2 rounded-3">
+                <img src="./src/assets/img/icon/icon-gg.svg" class="img-fluid icon-size-custom" />
+                <span class="fw-medium">Đăng Nhập Với Google</span>
+            </div>
+        </div>
+    </div>
+</main>

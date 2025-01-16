@@ -1,0 +1,36 @@
+<main class="body">
+    <div class="container w-50 m-auto mt-5 d-flex flex-column gap-4">
+        <h3 class="text-center">Tra Cứu Trạng Thái Đơn Hàng</h3>
+
+        <form ng-submit="lockup()">
+            <label class="form-label mb-3">Mã Đơn Hàng</label>
+            <input type="text" class="form-control mb-3" ng-model="idBill" placeholder="Nhập vào mã đơn hàng của bạn">
+            <button type="submit" class="btn btn-danger">Tra Cứu</button>
+        </form>
+
+        <div ng-if="bill" class="w-75 m-auto border shadow-sm p-5">
+            <h4 class="text-center mb-5">Thông Tin Đơn Hàng</h4>
+
+            <div class="d-flex justify-content-between">
+                <p>Mã Đơn Hàng</p>
+                <p>{{ bill._id }}</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <p>Khách Hàng</p>
+                <p>{{ bill.name }}</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <p>Ngày Đặt Hàng</p>
+                <p>{{ bill.createdAt | date: "dd-MM-yyyy" }}</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <p>Trạng Thái</p>
+                <p>{{ bill.status }}</p>
+            </div>
+
+
+        </div>
+</main>

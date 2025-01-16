@@ -1,0 +1,97 @@
+<div class="content">
+    <div class="shadow-sm px-5 py-3 shadow-lg">
+        <h5 class="mb-0 fw-semibold">Thêm Người Dùng Mới</h5>
+    </div>
+
+    <div class="px-5">
+        <div class="row mt-5">
+            <div class="col-3 pe-5">
+                <div
+                    class="p-2 pb-5 d-flex flex-column align-items-center justify-content-between border shadow-sm rounded-3">
+                    <img src="../../../src/assets/img/avatar.jpg" alt="" class="img-fluid w-50 m-auto">
+                    <input type="file" name="avatar" id="avatar">
+                    <label for="" class="avatar">Chọn Ảnh</label>
+                </div>
+            </div>
+
+            <div class="col-9">
+                <div class="p-5 shadow-sm border">
+                    <form ng-submit="addUser()" class="row">
+                        <div class="col-12 col-md-6 mb-4">
+                            <label for="name" class="form-label">Họ Và Tên <span class="text-danger">*</span></label>
+                            <input type="text" name="name" id="name" class="form-control" ng-model="name">
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-4">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" name="email" id="email" class="form-control" ng-model="email">
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-4">
+                            <label for="password" class="form-label">Mật Khẩu <span class="text-danger">*</span></label>
+                            <input type="password" name="password" id="password" class="form-control"
+                                ng-model="password">
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-4">
+                            <label for="confirmPassword" class="form-label">Nhập Lại Mật Khẩu <span
+                                    class="text-danger">*</span></label>
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
+                                ng-model="confirmPassword">
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-4">
+                            <label for="phone" class="form-label">Số Điện Thoại </label>
+                            <input type="text" name="phone" id="phone" class="form-control" ng-model="phone">
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-4"></div>
+
+                        <div class="col-12 col-md-4 mb-4">
+                            <label class="form-label">Chọn tỉnh / thành phố</label>
+                            <select ng-model="selectedProvince" ng-options="province.Name for province in locations"
+                                class="form-control">
+                                <option value="">Chọn một tỉnh/thành phố</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-4 mb-4">
+                            <label for="district" class="form-label">Quận/Huyện</label>
+                            <select ng-model="selectedDistrict"
+                                ng-options="district.Name for district in selectedProvince.Districts"
+                                class="form-control">
+                                <option value="">Chọn một quận/huyện</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-4 mb-4">
+                            <label for="ward" class="form-label">Phường/Xã</label>
+                            <select ng-model="selectedWard" ng-options="ward.Name for ward in selectedDistrict.Wards"
+                                class="form-control">
+                                <option value="">Chọn một phường/xã</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label for="addressDetail" class="form-label">Nhập địa chỉ cụ thể</label>
+                            <input type="text" name="addressDetail" id="addressDetail" class="form-control"
+                                ng-model="addressDetail">
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label for="role" class="form-label">Uỷ Quyền</label>
+                            <select name="role" id="role" class="form-select" ng-model="role" ng-init="role='user'">
+                                <option value="user">Tài Khoản Khách Hàng</option>
+                                <option value="admin">Quản Trị Viên</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <button type="submit" class="btn btn-danger">Thêm Người Dùng</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,507 @@
+<main class="body">
+    <div class="container">
+        <section class="carousel mt-4">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./src/assets/img/icon/banner1.webp" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./src/assets/img/icon/banner2.webp" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="mt-5">
+            <div class="sale-header d-flex align-items-center justify-content-between pb-2 border-bottom border-danger">
+                <div class="header_left">
+                    <img src="./src/assets/img/icon/icon-fls.svg" class="img-fluid">
+                    <div id="sale-clock"></div>
+                </div>
+                <div class="header-right d-flex align-items-center justify-content-center gap-3 cursor-pointer">
+                    <p class="fs-5 m-0">Xem tất cả </p>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="row mt-3 row-gap-4" ng-show="loading">
+                <div class="col-12 col-md-2" ng-repeat="n in [].constructor(6) track by $index">
+                    <div class="card" aria-hidden="true">
+                        <img src="https://phutungnhapkhauchinhhang.com/wp-content/uploads/2020/06/default-thumbnail.jpg"
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                                <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                            <a class="btn btn-danger disabled placeholder col-6" aria-disabled="true"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-3 row-gap-4">
+                <div class="col-6 col-md-4 col-xl-2" ng-repeat="product in flashSaleProducts | limitTo:6 ">
+                    <div class="card position-relative custom-card-hover p-1">
+                        <a ng-href="#!detail/{{ product._id }}" class="nav-link p-2">
+                            <img src="{{ product.images[0] }}" class="img-fluid card-img-top">
+                        </a>
+                        <div class="card-body p-2">
+                            <a class="nav-link fs-7" ng-href="#!detail/{{ product._id }}">
+                                {{ product.title }}
+                            </a>
+
+                            <div class="d-flex align-items-center justify-content-start gap-2">
+                                <p class="text-danger fw-bold mb-0">
+                                    {{ product.sale > 0 ? ((product.price - (product.price * product.sale / 100)) |
+                                    currency:'':'0') + 'đ' : (product.price | currency:'':'0') + 'đ' }}
+                                </p>
+                                <p class="mb-0 fs-8 text-decoration-line-through">
+                                    {{ product.sale > 0 ? (product.price | currency:'':'0') + 'đ' : '' }}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-danger w-50 mb-2 ms-1" data-bs-toggle="modal"
+                            data-bs-target="#showDetail" ng-click="showDetail(product)">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+
+                        <span class="badge text-bg-danger position-absolute p-2" ng-if="product.sale > 0">
+                            {{ product.sale }}%
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-5">
+            <div class="d-flex flex-column align-items-center">
+                <div class="box-header">
+                    <h3 class="text-center mb-3">Sản Phẩm Mới Ra Mắt</h3>
+                </div>
+
+                <div class="row mt-3 row-gap-4" ng-show="loading">
+                    <div class="col-12 col-md-2" ng-repeat="n in [].constructor(6) track by $index">
+                        <div class="card" aria-hidden="true">
+                            <img src="https://phutungnhapkhauchinhhang.com/wp-content/uploads/2020/06/default-thumbnail.jpg"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                </h5>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-8"></span>
+                                </p>
+                                <a class="btn btn-danger disabled placeholder col-6" aria-disabled="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-3 row-gap-4" ng-hide="newProductsLoading">
+                    <div class="col-6 col-md-4 col-xl-2" ng-repeat="product in newProducts | limitTo: 6 ">
+                        <div class="card position-relative custom-card-hover">
+                            <a ng-href="#!detail/{{ product._id }}" class="nav-link p-2">
+                                <img src="{{ product.images[0] }}" class="img-fluid card-img-top">
+                            </a>
+                            <div class="card-body p-2">
+                                <a class="nav-link fs-7" ng-href="#!detail/{{ product._id }}">
+                                    {{ product.title }}
+                                </a>
+
+                                <div class="d-flex align-items-center justify-content-start gap-2">
+                                    <p class="text-danger fw-bold mb-0">
+                                        {{ product.sale > 0 ? ((product.price - (product.price * product.sale / 100)) |
+                                        currency:'':'0') + 'đ' : (product.price | currency:'':'0') + 'đ' }}
+                                    </p>
+                                    <p class="mb-0 fs-8 text-decoration-line-through">
+                                        {{ product.sale > 0 ? (product.price | currency:'':'0') + 'đ' : '' }}
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="btn btn-danger w-50 mb-2 ms-1" data-bs-toggle="modal"
+                                data-bs-target="#showDetail" ng-click="showDetail(product)">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                            <span class="badge text-bg-danger position-absolute p-2" ng-if="product.sale > 0">
+                                {{ product.sale }}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-danger px-5 mt-4">Xem Tất Cả <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section class="mt-5">
+            <div class="d-flex flex-column align-items-center">
+                <div class="box-header">
+                    <h3 class="text-center mb-3">Sản Phẩm Nhiều Lượt Xem</h3>
+                </div>
+
+                <div class="row mt-3 row-gap-4" ng-show="loading">
+                    <div class="col-12 col-md-2" ng-repeat="n in [].constructor(6) track by $index">
+                        <div class="card" aria-hidden="true">
+                            <img src="https://phutungnhapkhauchinhhang.com/wp-content/uploads/2020/06/default-thumbnail.jpg"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                </h5>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-8"></span>
+                                </p>
+                                <a class="btn btn-danger disabled placeholder col-6" aria-disabled="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-3 row-gap-4" ng-hide="viewProductsLoading">
+                    <div class="col-6 col-md-4 col-xl-2" ng-repeat="product in viewProducts | limitTo:8">
+                        <div class="card position-relative custom-card-hover">
+                            <a ng-href="#!detail/{{ product._id }}" class="nav-link p-2">
+                                <img src="{{ product.images[0] }}" class="img-fluid card-img-top">
+                            </a>
+                            <div class="card-body p-2">
+                                <a class="nav-link fs-7" ng-href="#!detail/{{ product._id }}">
+                                    {{ product.title }}
+                                </a>
+
+                                <div class="d-flex align-items-center justify-content-start gap-2">
+                                    <p class="text-danger fw-bold mb-0">
+                                        {{ product.sale > 0 ? ((product.price - (product.price * product.sale / 100)) |
+                                        currency:'':'0') + 'đ' : (product.price | currency:'':'0') + 'đ' }}
+                                    </p>
+                                    <p class="mb-0 fs-8 text-decoration-line-through">
+                                        {{ product.sale > 0 ? (product.price | currency:'':'0') + 'đ' : '' }}
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="btn btn-danger w-50 mb-2 ms-1" data-bs-toggle="modal"
+                                data-bs-target="#showDetail" ng-click="showDetail(product)">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                            <span class="badge text-bg-danger position-absolute p-2" ng-if="product.sale > 0">
+                                {{ product.sale }}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-danger px-5 mt-4">Xem Tất Cả <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+
+        <section class="mt-5">
+            <div class="d-flex flex-column align-items-center gap-3">
+                <div class="box-header">
+                    <h3 class="text-center mb-3">Tin Tức </h3>
+                </div>
+
+                <div class="group-news row gap-xl-0 gap-3">
+                    <div class="col-xl-6 col-sm-12">
+                        <div class="card p-4">
+                            <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17049604396463943_512.jpg&w=1920&q=75"
+                                class="img-fluid w-100 card-img-top">
+                            <h5 class="my-2 card-title">HAPPY 8/3 Tặng Miễn Phí Nước hoa Pháp dành riêng<br> Thành
+                                viên App
+                            </h5>
+
+                            <p class="text-news">Happy Women's Day 8/3 - Ngày Đẹp tặng phái Đẹp! App TokyoLife thân
+                                TẶNG
+                                MIỄN PHÍ Nước hoa
+                                Pháp dành riêng Thành viên! Mở App là có QUÀ, chương trình duy nhất từ 1.3 -
+                                10.3.2024,
+                                cài
+                                app ngay hôm nay kẻo lỡ nhé!</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-6 com-sm-12 d-flex flex-column gap-3">
+                        <div class="card">
+                            <div class="news-1 d-flex flex-md-row align-items-start justify-content-between gap-3">
+                                <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F1709267987752546_512.jpg&w=1920&q=75"
+                                    style="width: 180px;" class="news-img-custom">
+
+                                <div>
+                                    <h6 class="my-2">Happy 8/3 Happy Sale - Vì Phụ Nữ là Để Yêu!</h6>
+                                    <p class="text-news">Mừng Ngày Quốc tế Phụ nữ 8/3, TokyoLife gửi ngàn quà tặng ý
+                                        nghĩa dành tặng phái đẹp! GIẢM 50% dưỡng da Sakura, nước hoa...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="news-1 d-flex align-items-start justify-content-between gap-3">
+                                <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17047984759586921_512.jpg&w=1920&q=75"
+                                    style="width: 180px;" class="news-img-custom">
+
+                                <div>
+                                    <h6 class="my-2">Happy 8/3 Happy Sale - Vì Phụ Nữ là Để Yêu!</h6>
+                                    <p class="text-news">Mừng Ngày Quốc tế Phụ nữ 8/3, TokyoLife gửi ngàn quà tặng ý
+                                        nghĩa dành tặng phái đẹp! GIẢM 50% dưỡng da Sakura, nước hoa...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="news-1 d-flex align-items-start justify-content-between gap-3">
+                                <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fposts%2Fnguyen-ly-hoat-dong-cua-ao-giu-nhiet-va-3-dong-ao-warmmax-duoc-yeu-thich-nhat%2F3286b860e18940229a8e5ca7bc0e4d0e_thumbnail.jpg&w=1920&q=75"
+                                    style="width: 180px;" class="news-img-custom">
+
+                                <div>
+                                    <h6 class="my-2">Happy 8/3 Happy Sale - Vì Phụ Nữ là Để Yêu!</h6>
+                                    <p class="text-news">Mừng Ngày Quốc tế Phụ nữ 8/3, TokyoLife gửi ngàn quà tặng ý
+                                        nghĩa dành tặng phái đẹp! GIẢM 50% dưỡng da Sakura, nước hoa...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="news-1 d-flex align-items-start justify-content-between gap-3">
+                                <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fposts%2Fbst-ao-polo-tokyo-the-he-moi-2023%2F56f4b7b0c2494961bfc8311147ff335a_thumbnail.jpg&w=1920&q=75"
+                                    style="width: 180px;" class="news-img-custom">
+
+                                <div>
+                                    <h6 class="my-2">Happy 8/3 Happy Sale - Vì Phụ Nữ là Để Yêu!</h6>
+                                    <p class="text-news">Mừng Ngày Quốc tế Phụ nữ 8/3, TokyoLife gửi ngàn quà tặng ý
+                                        nghĩa dành tặng phái đẹp! GIẢM 50% dưỡng da Sakura, nước hoa...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-danger px-5">Xem Tất Cả <i class="fa-solid fa-arrow-right"></i></button>
+
+            </div>
+        </section>
+
+        <section class="mt-5">
+            <div class="position-relative d-sm-flex">
+                <img src="./src/assets/img/icon/store-bg.jpg" class="w-100 d-sm-flex" height="600px">
+
+                <div
+                    class="group-text d-flex flex-column gap-3 align-items-start justify-content-start position-absolute top-50 start-0 w-50 translate-middle-y">
+                    <h4>HỆ THỐNG CỬA HÀNG</h4>
+                    <h3 class="fw-bold"><span class="text-danger">TOKYOLIFE</span> CÓ HỆ THỐNG CỬA HÀNG <br> TRÊN
+                        TOÀN VIỆT NAM</h3>
+                    <p>Trải dài trên khắp Việt Nam, TokyoLife mang đến cuộc sống hiện đại,<br> thông minh và chất
+                        lượng hơn tới hàng triệu người tiêu dùng Việt.</p>
+                    <button class="btn btn-danger px-5">Xem Vị Trí Cửa Hàng</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="mt-5 bg-menu-custom py-5">
+        <div class="box-header">
+            <h3 class="text-center mb-5">Chứng Nhận Chính Hãng </h3>
+        </div>
+
+        <div class="container p-0">
+            <div class="row">
+                <div class="col-xl-6 col-sm-12">
+                    <img src="./src/assets/img/icon/chung-nhan-chinh-hang.webp" class="img-fluid w-100">
+                </div>
+
+                <div class="col-xl-6 col-sm-2 d-flex flex-column align-items-start justify-content-start gap-3">
+                    <div class="box-header d-flex flex-row align-items-center gap-4">
+                        <img src="./src/assets/img/icon/icon-special.svg" alt="" class="img-fluid">
+                        <p class="mb-0 fs-5 fw-bold">CHỨNG NHẬN NHẬP KHẨU SẢN PHẨM CHÍNH HÃNG TỪ CÁC THƯƠNG HIỆU NỔI
+                            TIẾNG NHẬT BẢN ...</p>
+                    </div>
+
+                    <p class="box-content">
+                        TokyoLife cam kết luôn mang tới cho khách hàng các sản phẩm tốt chính hãng đến từ các các
+                        thương hiệu Nhật Bản. Tất cả sản phẩm MADE IN JAPAN đều có giấy chứng nhận nhập khẩu chính
+                        hãng từ các nhà phân phối nhằm đưa tới sự trải nghiệm sản phẩm tốt nhất dành cho khách hàng
+                        thân yêu của TokyoLife.
+                    </p>
+
+                    <button class="btn btn-danger">
+                        Xem Thêm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div
+                    class="col-xl-3 col-md-4 col-sm-6 text-center p-4 rounded-2 shadow-sm multi-box d-flex flex-column align-items-center justify-content-between">
+                    <img src="./src/assets/img/icon/icon-like.svg" class="img-fluid">
+                    <h6 class="fw-bold my-3">Hàng Hoá Chất Lượng</h6>
+                    <small>Tận hưởng các mặt hàng chất lượng hàng đầu với giá cả hợp lý</small>
+                </div>
+
+                <div
+                    class="col-xl-3 col-md-4 col-sm-6 text-center p-4 rounded-2 shadow-sm multi-box d-flex flex-column align-items-center justify-content-between">
+                    <img src="./src/assets/img/icon/icon-support.svg" class="img-fluid">
+                    <h6 class="fw-bold my-3">Hàng Hoá Chất Lượng</h6>
+                    <small>Tận hưởng các mặt hàng chất lượng hàng đầu với giá cả hợp lý</small>
+                </div>
+
+                <div
+                    class="col-xl-3 col-md-4 col-sm-6 text-center p-4 rounded-2 shadow-sm multi-box d-flex flex-column align-items-center justify-content-between">
+                    <img src="./src/assets/img/icon/icon-truck.svg" class="img-fluid">
+                    <h6 class="fw-bold my-3">Hàng Hoá Chất Lượng</h6>
+                    <small>Tận hưởng các mặt hàng chất lượng hàng đầu với giá cả hợp lý</small>
+                </div>
+
+                <div
+                    class="col-xl-3 col-md-4 col-sm-6 text-center p-4 rounded-2 shadow-sm multi-box d-flex flex-column align-items-center justify-content-between">
+                    <img src="./src/assets/img/icon/icon-money.svg" class="img-fluid">
+                    <h6 class="fw-bold my-3">Hàng Hoá Chất Lượng</h6>
+                    <small>Tận hưởng các mặt hàng chất lượng hàng đầu với giá cả hợp lý</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5 text-bg-danger">
+        <div class="container py-5 text-center d-flex flex-column gap-3 justify-content-between  align-items-center">
+            <img src="./src/assets/img/icon/logo-white.svg" class="img-fluid" width="200px">
+
+            <h5 class="fst-italic">
+                TokyoLife trân trọng cảm ơn Quý Khách đã ủng hộ và góp phần tạo thêm cơ hội việc làm cho 142 người
+                khuyết tật.
+            </h5>
+
+            <p class="fst-italic mb-0">
+                TokyoLife là cửa hàng bán lẻ đồ gia dụng, hóa mỹ phẩm, phụ kiện chính hãng các thương hiệu Nhật Bản:
+                Inomata, Ebisu, ORP Tokyo, Momotani, Naturie, Rohto (Hada Labo, Melano CC...), Kose (Dòng Softymo),
+                Shiseido (Dòng Senka, Anessa, Tsubaki, Uno, D.Program), KAO (Biore, Laurier), Rosette, Unicharm,
+                Rocket, Naris, Meishoku, Chuchu Baby, Deonatulle, Kumano, Taiyo Brush, Okamura, Dentultima, KAI,
+                Pelican… Nước hoa TokyoLife sản xuất tại Pháp. Hóa phẩm lành tính TokyoLife sản xuất tại Nhật Bản.
+                Mỹ phẩm TokyoLife sản xuất tại Nhật Bản, Hàn Quốc. Sản phẩm Thời trang và Phụ kiện hiệu: TokyoLife,
+                TokyoNow, TokyoBasic, TokyoSmart, TokyoSecret. Sản phẩm tiêu dùng hiệu: TokyoLife, TokyoHome,
+                TokyoSword... và nhiều thương hiệu khác sản xuất tại Việt Nam, Trung Quốc, Thái Lan…
+            </p>
+        </div>
+    </section>
+
+    <div class="modal fade" id="showDetail" tabindex="-1" aria-labelledby="showDetail" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thông Tin Sản Phẩm</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="{{ selectedProduct.images[0] }}" class="img-fluid w-100">
+                            </div>
+
+                            <div class="col-6 d-flex flex-column gap-4">
+
+                                <div class="d-flex flex-column gap-1">
+                                    <h4 class="text-start fw-bold mb-0">{{ selectedProduct.title }}</h4>
+
+                                    <div class="star-group text-warning">
+                                        <span ng-if="selectedProduct.totalRating === 0">Chưa có đánh giá</span>
+
+                                        <i class="fa-solid fa-star"
+                                            ng-repeat="i in [].constructor(selectedProduct.totalRating) track by $index"></i>
+                                    </div>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center pb-3 custom-dash">
+                                    <div class="d-flex align-items-center justify-content-start gap-3">
+
+                                        <p class="mb-0 fw-bold fs-4 text-danger">
+                                            {{ selectedProduct.sale > 0 ? ((selectedProduct.price -
+                                            (selectedProduct.price * selectedProduct.sale /
+                                            100)) |
+                                            currency:'':'0') + 'đ' : (selectedProduct.price | currency:'':'0') + 'đ' }}
+                                        </p>
+                                        <p class="mb-0 fw-light text-decoration-line-through" ng-if="product.sale > 0">
+                                            {{ selectedProduct.sale > 0 ? (selectedProduct.price | currency:'':'0') +
+                                            'đ' : '' }}
+                                        </p>
+                                        <span class="badge text-bg-danger" ng-if="product.sale > 0">
+                                            {{ selectedProduct.sale }}%
+                                        </span>
+                                    </div>
+
+                                    <div class="icon-check">
+                                        <span class="fw-medium">Còn Hàng</span>
+                                        <img src="./src/assets/img/icon/icon-check.svg" alt />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="selectedVariant" class="form-label">Chọn loại sản phẩm</label>
+                                    <select class="form-control w-25" ng-model="selectedVariant"
+                                        ng-options="variant._id as (variant.color + ' - ' + variant.size ) for variant in selectedProduct.variants">
+                                    </select>
+
+                                    <div ng-show="selectedVariant">
+                                        <p class="mb-0 mt-3">Số lượng: {{ getProductQuantity(selectedVariant) }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="group-quantity">
+                                    <div class="d-flex flex-column gap-2">
+                                        <span class="fs-6 fw-bold d-block">Số Lượng</span>
+                                        <div class="d-flex">
+                                            <div class="custom-btn-quantity" ng-click="changeQuantity('decrease')">-
+                                            </div>
+                                            <input type="number" name="quantity" id="quantity"
+                                                class="custom-input-quantity text-center" ng-model="quantity">
+                                            <div class="custom-btn-quantity" ng-click="changeQuantity('increase')">+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-danger mt-3 " ng-click="addToCart(selectedProduct)">
+                                    Thêm vào giỏ hàng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
