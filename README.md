@@ -26,6 +26,7 @@
 ### Cài Đặt
 <details>
 <summary>Click để mở rộng</summary>
+<br>
 
 1. **Yêu cầu Node.js**
 - Đảm bảo bạn đã cài đặt Node.js trên máy tính.
@@ -80,6 +81,7 @@
 ### Chạy thử
 <details>
 <summary>Click để mở rộng</summary>
+<br>
 
 1. **Chạy Server**
 
@@ -128,3 +130,8 @@
 - Di chuyển tới thư mục **User**, chuột phải vào file `index.html` chọn `Open with Live Server`
 
 </details>
+
+#### Màn hình
+
+https://github.com/user-attachments/assets/22872315-9d78-4380-9a66-c6c4d3bb532e
+
